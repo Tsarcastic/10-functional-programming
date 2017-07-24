@@ -47,6 +47,7 @@ Article.loadAll = rows => {
   Article.all.push(new Article(ele));
 });
 */
+var Article.all = rawData.map(ele => {return ele});
 
 };
 
@@ -62,13 +63,23 @@ Article.fetchAll = callback => {
 
 // TODO: Chain together a `map` and a `reduce` call to get a rough count of all words in all articles.
 Article.numWordsAll = () => {
-  return Article.all.map().reduce()
+  return Article.all.map( => return 1)
+  .reduce((total, n) => {
+    total++;
+  }
 };
 
 // TODO: Chain together a `map` and a `reduce` call to produce an array of unique author names. You will
 // probably need to use the optional accumulator argument in your reduce call.
 Article.allAuthors = () => {
-  return Article.all.map().reduce();
+  return Article.all.map(ele => {ele.author})
+  .reduce((acc, val => {
+    if (acc.includes(val)) {
+      acc.push(val);
+    }
+    return
+    }
+  });
 };
 
 Article.numWordsByAuthor = () => {
@@ -90,8 +101,8 @@ Article.truncateTable = callback => {
     method: 'DELETE',
   })
   .then(console.log) // REVIEW: Check out this clean syntax for just passing 'assumed' data into a named function!
-                     // The reason we can do this has to do with the way Promise.prototype.then works. It's a little
-                     // outside the scope of 301 material, but feel free to research!
+  // The reason we can do this has to do with the way Promise.prototype.then works. It's a little
+  // outside the scope of 301 material, but feel free to research!
   .then(callback);
 };
 
